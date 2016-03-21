@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="MyCheckBoxStyle">
+        <item name="android:button" >@drawable/layout_login_checkbox_state_selector</item>
+
+    </style>
+
+</resources>
