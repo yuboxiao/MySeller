@@ -25,13 +25,13 @@ public class LoginPresenter implements IBasePresenter{
 
     @Override
     public void request(int code) {
-        LoginModel model= (LoginModel) iBaseView.getInfo(code);
         switch (code){
             case RequestParams.REQUEST_GET://获取系统时间
                 Log.d("LoginPresenter", "这里AsyncHttpGet要发送请求了");
                 new AsyncHttpGet(RequestParams.GET_SYSTEM_TIME,"",this,code).execute();
                 break;
             case RequestParams.REQUEST_QUERY:
+                LoginModel model= (LoginModel) iBaseView.getInfo(code);
                 new LoginAsyncRequest(this,code).execute(RequestParams.LOGIN_PATH,model.account,model.password,model.sysTime);
                 break;
         }

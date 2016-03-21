@@ -2,6 +2,7 @@ package com.whut.myseller.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,11 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.whut.myseller.R;
 import com.whut.myseller.config.RequestParams;
 import com.whut.myseller.data.model.LoginModel;
 import com.whut.myseller.interfaces.IBaseView;
 import com.whut.myseller.presenter.LoginPresenter;
+
 
 /**
  * Created by yubo on 2016/3/17.
@@ -59,6 +62,23 @@ public class LoginActivity  extends Activity implements View.OnClickListener,IBa
             sysTime = (String) object;
             Log.d("LoginActivity", "sysTime --> " + sysTime);
             mLoginPresenter.request(RequestParams.REQUEST_QUERY);
+        }else if(RequestParams.REQUEST_QUERY == code){
+            String result = (String)object;
+            Log.d("LoginActivity__ybshow", result);
+            JSONObject jsonObject = (JSONObject) JSONObject.parse(result);
+            int resultCode = jsonObject.getInteger("code");
+            Log.d("LoginActivity_ybshow", "resultCode:" + resultCode);
+            if(resultCode == 1){
+                Intent intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
+                this.finish();
+                progressDialog.cancel();
+            }else{
+                progressDialog.cancel();
+                btnLogin.setClickable(true);
+                btnLogin.setBackgroundResource((R.drawable.layout_login_button_shape));
+                btnLogin.setText("登录");
+            }
         }
     }
 

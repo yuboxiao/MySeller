@@ -13,16 +13,14 @@ import java.util.HashMap;
  */
 public class MyTest extends InstrumentationTestCase{
 
-    public static void main(String[] args) throws JSONException {
-//        HashMap map = new HashMap();
-//        map.put("account","xyb");
-//        map.put("password","123");
-//        map.put("time", "123123");
-//
-//        String json = MapToJson.MapToJson(map);
-//        System.out.println(json);
+    public void test() throws JSONException {
+        HashMap map = new HashMap();
+        map.put("account","xyb");
+        map.put("password","123");
+        map.put("time", "123123");
 
-        assertEquals(1,1);
+        String json = MapToJson.MapToJson(map);
+        System.out.println(json);
     }
 
 }

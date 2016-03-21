@@ -22,12 +22,9 @@ public class WebHelper {
 
     public static String getJsonString(String url, String cookie) {
         try {
-            url="http://jsonstub.com/web/store/service/201/node_tair_web/owner/servertime";
             System.out.println("--------->"+url);
             HttpGet httpGet = new HttpGet(url);
-            httpGet.setHeader("JsonStub-User-Key", "0a0d2a98-1798-4349-9f3a-c2a6dc5b117c");
-            httpGet.setHeader("JsonStub-Project-Key","9c917548-d960-4163-ad78-0bd714ff06ab");
-            httpGet.setHeader("Content-Type","application/json");
+            httpGet.addHeader("Content-Type","application/json");
             httpGet.addHeader("cookie", cookie);
             HttpParams p = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(p, 5000);
