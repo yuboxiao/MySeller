@@ -31,6 +31,9 @@ public class LoginPresenter implements IBasePresenter{
                 Log.d("LoginPresenter", "这里AsyncHttpGet要发送请求了");
                 new AsyncHttpGet(RequestParams.GET_SYSTEM_TIME,"",this,code).execute();
                 break;
+            case RequestParams.REQUEST_QUERY:
+                new LoginAsyncRequest(this,code).execute(RequestParams.LOGIN_PATH,model.account,model.password,model.sysTime);
+                break;
         }
     }
 

@@ -5,6 +5,13 @@ import android.util.Log;
 
 import com.whut.myseller.presenter.LoginPresenter;
 
+import org.apache.http.NameValuePair;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by yubo on 2016/3/18.
  * AsyncTask
@@ -25,7 +32,18 @@ public class LoginAsyncRequest extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        Log.d("LoginAsyncRequest", "doInBackground----->");
+//        Log.d("LoginAsyncRequest", "doInBackground----->");
+//        Log.d("parms[0]",params[0]);
+//        Log.d("parms[0]",params[1]);
+//        Log.d("parms[0]",params[2]);
+//        Log.d("parms[0]",params[3]);
+        List<NameValuePair> list = new ArrayList<NameValuePair>();
+        Map form = new HashMap();
+        form.put("account",params[1]);
+        form.put("password",params[2]);
+        form.put("time",params[3]);
+
+
 
         return null;
     }

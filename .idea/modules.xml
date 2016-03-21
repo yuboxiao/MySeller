@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/MySeller.iml" filepath="$PROJECT_DIR$/MySeller.iml" />
-      <module fileurl="file://$PROJECT_DIR$/myseller/myseller.iml" filepath="$PROJECT_DIR$/myseller/myseller.iml" />
-    </modules>
-  </component>
-</project>

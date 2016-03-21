@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.whut.myseller.R;
 import com.whut.myseller.config.RequestParams;
+import com.whut.myseller.data.model.LoginModel;
 import com.whut.myseller.interfaces.IBaseView;
 import com.whut.myseller.presenter.LoginPresenter;
 
@@ -24,7 +25,9 @@ public class LoginActivity  extends Activity implements View.OnClickListener,IBa
     private Button btnLogin;
     private EditText etUsername;
     private EditText etPassword;
-
+    private String usernameStr;
+    private String passwordStr;
+    private String sysTime;
     private LoginPresenter mLoginPresenter;
 
     @Override
@@ -53,13 +56,19 @@ public class LoginActivity  extends Activity implements View.OnClickListener,IBa
     @Override
     public void setInfo(Object object, int code) {
         if(RequestParams.REQUEST_GET == code){
-            String sysTime = (String) object;
+            sysTime = (String) object;
             Log.d("LoginActivity", "sysTime --> " + sysTime);
+            mLoginPresenter.request(RequestParams.REQUEST_QUERY);
         }
     }
 
     @Override
     public Object getInfo(int code) {
+        if(code == RequestParams.REQUEST_QUERY){
+            LoginModel model = new LoginModel(usernameStr,passwordStr,sysTime);
+            return  model;
+        }
+
         return null;
     }
 
@@ -84,8 +93,8 @@ public class LoginActivity  extends Activity implements View.OnClickListener,IBa
         btnLogin.setText("登录中...");
         if(!TextUtils.isEmpty(etUsername.getText())&&
                 !TextUtils.isEmpty(etPassword.getText())){
-            String usernameStr = etUsername.getText().toString();
-            String passwordStr = etPassword.getText().toString();
+            usernameStr = etUsername.getText().toString();
+            passwordStr = etPassword.getText().toString();
             Log.d("LoginActivity", "usernameStr+passwordStr" + usernameStr+passwordStr);
         }else {
             Toast.makeText(this, "用户名密码不能为空", Toast.LENGTH_SHORT).show();
