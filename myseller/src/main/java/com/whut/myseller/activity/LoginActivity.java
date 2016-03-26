@@ -2,6 +2,7 @@ package com.whut.myseller.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,10 +14,12 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.whut.myseller.R;
+import com.whut.myseller.config.Constants;
 import com.whut.myseller.config.RequestParams;
 import com.whut.myseller.data.model.LoginModel;
 import com.whut.myseller.interfaces.IBaseView;
 import com.whut.myseller.presenter.LoginPresenter;
+import com.whut.myseller.utils.SharePreferenceHelper;
 
 
 /**
@@ -60,13 +63,25 @@ public class LoginActivity  extends Activity implements View.OnClickListener,IBa
     public void setInfo(Object object, int code) {
         if(RequestParams.REQUEST_GET == code){
             sysTime = (String) object;
-            Log.d("LoginActivity", "sysTime --> " + sysTime);
-            mLoginPresenter.request(RequestParams.REQUEST_QUERY);
+            if(sysTime.length()>11){
+                System.out.println("sysTime--->"+sysTime);
+                Toast.makeText(this,"网络错误",Toast.LENGTH_SHORT).show();
+                progressDialog.cancel();
+                btnLogin.setClickable(true);
+                btnLogin.setBackground(getResources().getDrawable(
+                        R.drawable.layout_login_button_shape));
+                btnLogin.setText("登录");
+            }else{
+                Log.d("LoginActivity", "sysTime --> " + sysTime);
+                mLoginPresenter.request(RequestParams.REQUEST_QUERY);
+            }
         }else if(RequestParams.REQUEST_QUERY == code){
             String result = (String)object;
             Log.d("LoginActivity__ybshow", result);
             JSONObject jsonObject = (JSONObject) JSONObject.parse(result);
             int resultCode = jsonObject.getInteger("code");
+            SharePreferenceHelper helper = new SharePreferenceHelper(this,"ShopIdCookie", Context.MODE_PRIVATE);
+            helper.setString("cookie",Constants.USER_COOKIE);
             Log.d("LoginActivity_ybshow", "resultCode:" + resultCode);
             if(resultCode == 1){
                 Intent intent = new Intent(this,MainActivity.class);
