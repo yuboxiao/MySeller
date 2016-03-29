@@ -44,9 +44,9 @@ public class CloudMonitorActivity extends Activity implements View.OnClickListen
     }
 
     private void setFragment(int index) {
-        reset();
-        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        reset(fragmentTransaction);
         switch (index){
             case 0:
                 if(mWifiUsageFragment == null){
@@ -70,9 +70,15 @@ public class CloudMonitorActivity extends Activity implements View.OnClickListen
         fragmentTransaction.commit();
     }
 
-    private void reset() {
+    private void reset(FragmentTransaction fragmentTransaction) {
         ivWifiInfo.setImageResource(R.mipmap.wifi_usage_off);
         ivTodayCount.setImageResource(R.mipmap.today_count_off);
+        if(mWifiUsageFragment != null){
+            fragmentTransaction.hide(mWifiUsageFragment);
+        }
+        if(mTodayCountFragment != null){
+            fragmentTransaction.hide(mTodayCountFragment);
+        }
     }
 
     private void initData() {

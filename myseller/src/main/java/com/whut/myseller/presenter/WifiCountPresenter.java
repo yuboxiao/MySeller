@@ -29,6 +29,7 @@ public class WifiCountPresenter implements IBasePresenter{
 
     @Override
     public void respose(String data, int code) {
+        //{"code":1,"client":{"c4:66:99:6c:a9:0a":{"cnnTime":27600,"authTime":27480,"state":0},"d0:7a:b5:ee:01:78":{"cnnTime":23940,"authTime":23340,"state":0},
         System.out.println("???????????data = "+ data);
         iBaseView.setInfo(data,code);
     }
