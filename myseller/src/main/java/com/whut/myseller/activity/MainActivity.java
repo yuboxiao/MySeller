@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.whut.myseller.R;
@@ -26,8 +27,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.jpush.android.api.InstrumentedActivity;
+import cn.jpush.android.api.JPushInterface;
 
-public class MainActivity extends Activity implements IBaseView{
+
+public class MainActivity extends Activity implements IBaseView,View.OnClickListener{
 
     private WebSocketClient wsc;
     private String cookie;
@@ -40,6 +44,8 @@ public class MainActivity extends Activity implements IBaseView{
         setContentView(R.layout.activity_main);
         initData();
         initView();
+
+
     }
 
     private void initData() {
@@ -125,5 +131,54 @@ public class MainActivity extends Activity implements IBaseView{
     @Override
     public Object getInfo(int code) {
         return cookie;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = null;
+        System.out.println("show in MainActivity----+onClick "+shopId);
+        if(shopId == null){
+            return;
+        }
+        switch (v.getId()){
+            case R.id.goto_preferential_manage: // 优惠管理
+//			intent = new Intent(context, PreferentialManagerActivity.class);
+//			startActivity(intent);
+
+                break;
+            case R.id.goto_guest_flow: // 客流管理
+//			intent = new Intent(context, GuestStateActivity.class);
+//			startActivity(intent);
+                break;
+            case R.id.goto_my_store: // 我的店铺
+//                if(null!=myshop){
+//                    intent = new Intent(this, StoreManageActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("myshop", myshop);
+//                    intent.putExtras(bundle);
+//                    startActivity(intent);
+//                }
+                break;
+
+            case R.id.goto_store_manage: //店铺管理
+//                intent = new Intent(this, ShopManageActivity.class);
+//                startActivity(intent);
+                break;
+
+            case R.id.goto_wifi_manage: // wifi管理
+//                intent = new Intent(this, WifiManageActivityNew.class);
+//                startActivity(intent);
+                break;
+            case R.id.goto_cloud_monitor: // 云监控
+                intent = new Intent(this, CloudMonitorActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.goto_ads_manage: // portal管理
+//                intent = new Intent(this, AdsManageActivity.class);
+//                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 }

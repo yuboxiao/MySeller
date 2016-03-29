@@ -9,8 +9,11 @@ import android.util.Log;
 
 import com.whut.myseller.R;
 
+import cn.jpush.android.api.InstrumentedActivity;
+import cn.jpush.android.api.JPushInterface;
 
-public class WelcomeActivity extends Activity {
+
+public class WelcomeActivity extends InstrumentedActivity {
 
 
     private Handler mHandler = new Handler() {
@@ -21,6 +24,8 @@ public class WelcomeActivity extends Activity {
             Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
             startActivity(intent);
             WelcomeActivity.this.finish();
+
+
         }
     };
 
@@ -29,6 +34,9 @@ public class WelcomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         mHandler.sendEmptyMessageDelayed(0, 3000);
+
+
+
     }
 
 }

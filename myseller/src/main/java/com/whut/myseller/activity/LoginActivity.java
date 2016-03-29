@@ -2,8 +2,10 @@ package com.whut.myseller.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,11 +23,14 @@ import com.whut.myseller.interfaces.IBaseView;
 import com.whut.myseller.presenter.LoginPresenter;
 import com.whut.myseller.utils.SharePreferenceHelper;
 
+import cn.jpush.android.api.InstrumentedActivity;
+import cn.jpush.android.api.JPushInterface;
+
 
 /**
  * Created by yubo on 2016/3/17.
  */
-public class LoginActivity  extends Activity implements View.OnClickListener,IBaseView{
+public class LoginActivity  extends InstrumentedActivity implements View.OnClickListener,IBaseView{
 
     private ProgressDialog progressDialog;
     private Button btnLogin;
@@ -43,7 +48,51 @@ public class LoginActivity  extends Activity implements View.OnClickListener,IBa
 
         initData();
         initView();
+
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+
+
+       // registerMessageReceiver();
     }
+
+
+    //for receive customer msg from jpush server
+    private MessageReceiver mMessageReceiver;
+    public static final String MESSAGE_RECEIVED_ACTION = "com.example.jpushdemo.MESSAGE_RECEIVED_ACTION";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_MESSAGE = "message";
+    public static final String KEY_EXTRAS = "extras";
+
+    public void registerMessageReceiver() {
+        mMessageReceiver = new MessageReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+        filter.addAction(MESSAGE_RECEIVED_ACTION);
+        registerReceiver(mMessageReceiver, filter);
+    }
+
+    public class MessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+                String messge = intent.getStringExtra(KEY_MESSAGE);
+                String extras = intent.getStringExtra(KEY_EXTRAS);
+                StringBuilder showMsg = new StringBuilder();
+                showMsg.append(KEY_MESSAGE + " : " + messge + "\n");
+
+
+                System.out.println("==================" + messge);
+                System.out.println("===================" + extras);
+                System.out.println("=================="+showMsg);
+            }
+        }
+    }
+
+
+
+
 
     private void initData() {
         mLoginPresenter = new LoginPresenter(this);

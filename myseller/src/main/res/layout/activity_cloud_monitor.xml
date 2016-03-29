@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <include layout="@layout/activity_cloud_monitor_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/cloud_monitor_bar_bg"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        >
+
+        <TableRow
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            >
+
+
+            <ImageView
+                android:id="@+id/wifi_info_icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:src="@mipmap/wifi_usage_on" />
+
+            <ImageView
+                android:id="@+id/today_count_icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:src="@mipmap/today_count_off" />
+
+            <ImageView
+                android:id="@+id/ad_data_icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:src="@mipmap/ad_post_off" />
+
+
+            <ImageView
+                android:id="@+id/new_old_user_icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:onClick="onClick"
+                android:src="@mipmap/new_old_off" />
+            </TableRow>
+
+
+
+        </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@mipmap/color_line" />
+
+    <!-- 切换统计和时事 -->
+    <FrameLayout
+        android:id="@+id/cloud_monitor_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        >
+    </FrameLayout>
+
+</LinearLayout>

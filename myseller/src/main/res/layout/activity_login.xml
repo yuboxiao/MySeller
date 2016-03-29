@@ -33,7 +33,9 @@
             android:background="@drawable/layout_login_input_dialog_bg"
             android:hint="@string/input_username"
             android:padding="10dp"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:text="wushuu"
+            />
 
     </LinearLayout>
 
@@ -65,7 +67,9 @@
             android:background="@drawable/layout_login_input_dialog_bg"
             android:hint="@string/input_password"
             android:padding="10dp"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:text="12345678"
+            />
     </LinearLayout>
 
     <RelativeLayout
