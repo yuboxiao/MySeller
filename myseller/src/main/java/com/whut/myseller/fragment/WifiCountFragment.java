@@ -1,6 +1,7 @@
 package com.whut.myseller.fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,17 +13,22 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.whut.myseller.R;
+import com.whut.myseller.config.RequestParams;
+import com.whut.myseller.interfaces.IBaseView;
+import com.whut.myseller.presenter.WifiCountPresenter;
+import com.whut.myseller.utils.SharePreferenceHelper;
 
 import java.util.ArrayList;
 
 /**
  * Created by root on 16-3-28.
  */
-public class WifiCountFragment extends Fragment {
+public class WifiCountFragment extends Fragment implements IBaseView{
 
     private View mView;
     private BarChart mBarChart;
     private BarData mBarData;
+    private String mCookie;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,7 +78,26 @@ public class WifiCountFragment extends Fragment {
     }
 
     private void initData() {
+        SharePreferenceHelper helper = new SharePreferenceHelper(getActivity(),"shopIdCookie", Context.MODE_PRIVATE);
+        mCookie = helper.getString("scookie", "");
+        new WifiCountPresenter(this).request(RequestParams.REQUEST_QUERY);
 
     }
 
+    @Override
+    public void setInfo(Object object, int code) {
+
+    }
+
+    @Override
+    public Object getInfo(int code) {
+        switch (code){
+            case RequestParams.COOKIE:
+                return mCookie;
+            case RequestParams.REQUEST_QUERY:
+                return "2";
+
+        }
+        return null;
+    }
 }
