@@ -10,4 +10,6 @@ public class Constants {
 
     public static final String VIP_BROADCAST = RequestParams.ROOT_HTTP.replace("http","ws")+"/node-tail-web/notify/vip";
 
+
+    public static final String CHART_NO_DATA_TEXT="no data show";
 }

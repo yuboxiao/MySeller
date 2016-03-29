@@ -29,7 +29,7 @@ public class WifiCountPresenter implements IBasePresenter{
 
     @Override
     public void respose(String data, int code) {
-        System.out.println("???????????date = "+ data);
+        System.out.println("???????????data = "+ data);
         iBaseView.setInfo(data,code);
     }
 }

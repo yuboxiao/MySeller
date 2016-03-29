@@ -4,10 +4,14 @@ import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -19,6 +23,8 @@ import com.whut.myseller.presenter.WifiCountPresenter;
 import com.whut.myseller.utils.SharePreferenceHelper;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Created by root on 16-3-28.
@@ -29,6 +35,7 @@ public class WifiCountFragment extends Fragment implements IBaseView{
     private BarChart mBarChart;
     private BarData mBarData;
     private String mCookie;
+    private  Handler handler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +54,22 @@ public class WifiCountFragment extends Fragment implements IBaseView{
         mBarChart.setNoDataTextDescription("You need to provide data for the chart.");
         mBarChart.animate();
         mBarChart.setDescription("");
+
+
+
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                // TODO Auto-generated method stub
+                switch (msg.what) {
+                    case 1:
+                       // updateData(chart, ChartsFactory.BAR_CHART);
+                        System.out.println("handler----------");
+                        break;
+                }
+
+            }
+        };
 
     }
 
@@ -79,14 +102,46 @@ public class WifiCountFragment extends Fragment implements IBaseView{
 
     private void initData() {
         SharePreferenceHelper helper = new SharePreferenceHelper(getActivity(),"shopIdCookie", Context.MODE_PRIVATE);
-        mCookie = helper.getString("scookie", "");
+        mCookie = helper.getString("cookie", "");
+        System.out.println("mCookie:----------------"+mCookie);
         new WifiCountPresenter(this).request(RequestParams.REQUEST_QUERY);
 
     }
 
     @Override
     public void setInfo(Object object, int code) {
+        JSONObject json = JSONObject.parseObject((String) object);
+        if(code == RequestParams.REQUEST_QUERY){
+            Message msg = new Message();
+            msg.what = 1;
+            if(json.getIntValue("code") == 1){
 
+                if (json != null) {
+//                    JSONObject  array = json.getJSONObject("client");
+//                    if (array != null) {
+//                        Set<String> set = array.keySet();
+//                        Iterator<String> iterator = set.iterator();
+//                        while (iterator.hasNext()) {
+//                            JSONObject object = array
+//                                    .getJSONObject(iterator.next());
+//                            int time = object.getIntValue("cnnTime");
+//                            checkData(time / 60);
+//                        }
+//                        System.out.println("sendmessage----------");
+//                        handler.sendMessage(msg);
+//                    } else {
+//                        Toast.makeText(getActivity(), "数据获取失败！",
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+                }
+
+            }else if((json.getIntValue("code") == 0)&&(json.getString("msg").contains("available"))){
+                handler.sendMessage(msg);
+
+            }else{
+                Toast.makeText(getActivity(),"获取失败",Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
