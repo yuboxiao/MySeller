@@ -114,6 +114,9 @@ public class WifiCountFragment extends Fragment implements IBaseView{
     private void updateChart(BarChart chart, List<BarDataSet> list) {
         // TODO Auto-generated method stub
 
+        System.out.println("x Axis is +++"+xValue.size());
+        System.out.println("list ++" + list.size());
+
         BarData data = new BarData(xValue, list);
         System.out.println("data----------" + data);
         chart.setData(data);
@@ -174,6 +177,8 @@ public class WifiCountFragment extends Fragment implements IBaseView{
         xValue = new ArrayList<String>();
         wifi_user_list = new ArrayList<Integer>();
         resetList();
+
+        initX(BAR_CHART_MAXNUM);
 
         SharePreferenceHelper helper = new SharePreferenceHelper(getActivity(),"ShopIdCookie", Context.MODE_PRIVATE);
         mCookie = helper.getString("cookie", "");

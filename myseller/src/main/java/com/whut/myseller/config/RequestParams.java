@@ -31,10 +31,10 @@ public class RequestParams {
     //根地址
 
    // public static final String SERVER_IP = "http://115.28.9.186:8020";
-//   public static final String SERVER_IP = "http://219.153.20.141";
+//  public static final String SERVER_IP = "http://219.153.20.141";
 //    public static final String SERVER_IP = "http://192.168.2.204";
 //    public static final String SERVER_IP = "http://192.168.2.202";
-  public static final String SERVER_IP = "http://119.60.8.152";
+ public static final String SERVER_IP = "http://119.60.8.152";
 
     public static final String ROOT_HTTP = SERVER_IP + "/web/store/service/201";
 
