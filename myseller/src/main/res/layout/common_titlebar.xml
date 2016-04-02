@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/title_bg_style">
+
+    <include layout="@layout/activity_cloud_monitor_back_icon"/>
+
+    <TextView
+        android:id="@+id/activity_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        style="@style/title_text_style"
+        android:text="AP管理"
+        />
+    <View
+        style="@style/dividing_line_style_thin"
+        android:layout_alignParentBottom="true"></View>
+</RelativeLayout>

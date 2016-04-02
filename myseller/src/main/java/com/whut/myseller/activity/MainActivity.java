@@ -166,8 +166,8 @@ public class MainActivity extends Activity implements IBaseView,View.OnClickList
                 break;
 
             case R.id.goto_wifi_manage: // wifi管理
-//                intent = new Intent(this, WifiManageActivityNew.class);
-//                startActivity(intent);
+               intent = new Intent(this, WifiMangageActivity.class);
+               startActivity(intent);
                 break;
             case R.id.goto_cloud_monitor: // 云监控
                 intent = new Intent(this, CloudMonitorActivity.class);

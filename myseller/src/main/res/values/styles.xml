@@ -21,5 +21,11 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <!-- 细分割线 -->
+    <style name="dividing_line_style_thin">
+        <item name="android:background">@color/light_gray</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.4dp</item>
+    </style>
 
 </resources>

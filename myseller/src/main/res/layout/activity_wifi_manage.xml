@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/common_titlebar"/>
+
+    <FrameLayout
+        android:id="@+id/wifi_frame"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+
+        android:background="@color/white"></FrameLayout>
+    <LinearLayout
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/wifi_bg"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/wifi_ap_manage"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:onClick="onClick"
+            android:clickable="true"
+            android:src="@drawable/apmanage_1"/>
+        <ImageView
+            android:id="@+id/wifi_ap_portal"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:onClick="onClick"
+            android:src="@drawable/vip_1"/>
+        <ImageView
+            android:id="@+id/wifi_ap_none"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
+            android:onClick="onClick"
+            android:src="@drawable/white_black_2"/>
+    </LinearLayout>
+
+
+</LinearLayout>

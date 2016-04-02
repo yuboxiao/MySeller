@@ -13,4 +13,10 @@
     <string name="forget_pwd">忘记密码</string>
     <string name="login">登录</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
+
+
+
+    <string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_release_label">释放刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载</string>
 </resources>
